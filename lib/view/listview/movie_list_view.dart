@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/utils/Constants.dart';
+import 'package:movie_app/view/detail_activity.dart';
 
 class MovieListView extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _MovieListViewState extends State<MovieListView> {
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
-        return CircularProgressIndicator();
+        return Center(child: CircularProgressIndicator());
       },
     );
   }
@@ -30,23 +31,33 @@ class _MovieListViewState extends State<MovieListView> {
     return ListView.builder(
       itemCount: movieData.length,
       itemBuilder: (context, index) {
-        return _tile(movieData[index]);
+        return Card(elevation: 3, child: _tile(movieData[index]));
       },
     );
   }
 
-  ListTile _tile(Movie data) => ListTile(
-    onTap: (){},
-        leading: CircleAvatar(
-          backgroundImage:
-              NetworkImage(Constants.baseIMAGEURL + data.posterPath),
+  ListTile _tile(Movie movie) => ListTile(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            
+            return DetailActivity(movie : movie);
+          }));
+        },
+        leading: Hero(
+          transitionOnUserGestures: false,
+          tag: movie.id.toString(),
+          child: CircleAvatar(
+            backgroundImage:
+                NetworkImage(Constants.baseIMAGEURL + movie.posterPath),
+          ),
         ),
         title: Text(
-          data.title,
+          movie.title,
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+          maxLines: 2,
         ),
         subtitle: Text(
-          data.overview,
+          movie.overview,
           maxLines: 2,
         ),
         dense: false,
