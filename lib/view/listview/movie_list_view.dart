@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/utils/Constants.dart';
+import 'package:movie_app/utils/page_transition.dart';
 import 'package:movie_app/view/detail_activity.dart';
 
 class MovieListView extends StatefulWidget {
@@ -38,10 +39,12 @@ class _MovieListViewState extends State<MovieListView> {
 
   ListTile _tile(Movie movie) => ListTile(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            
-            return DetailActivity(movie : movie);
-          }));
+          Navigator.push(context, PageTransition(
+            alignment: Alignment.bottomCenter,
+            curve: Curves.bounceOut,
+            type: PageTransitionType.upToDown,
+            child: DetailActivity(movie: movie,)
+          ));
         },
         leading: Hero(
           transitionOnUserGestures: false,

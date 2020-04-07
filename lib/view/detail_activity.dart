@@ -9,6 +9,7 @@ class DetailActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -20,7 +21,6 @@ class DetailActivity extends StatelessWidget {
             centerTitle: true,
             expandedHeight: 240.0,
             flexibleSpace: Stack(
-              
               children: <Widget>[
                 Positioned.fill(
                     child: Image.network(
@@ -56,73 +56,16 @@ class DetailActivity extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              ListTile(
-                leading: Icon(Icons.volume_off),
-                title: Text("Volume Off"),
-              ),
-              ListTile(
-                  leading: Icon(Icons.volume_down), title: Text("Volume Down")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                leading: Icon(Icons.volume_off),
-                title: Text("Volume Off"),
-              ),
-              ListTile(
-                  leading: Icon(Icons.volume_down), title: Text("Volume Down")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
-              ListTile(
-                  leading: Icon(Icons.volume_mute), title: Text("Volume Mute")),
+              Center(
+                child: Text(
+                  movie.title,
+                  style: TextStyle(fontSize: 30),
+                ),
+              )
             ]),
           )
         ],
       ),
-
-      // Center(
-      //   child: Hero(
-
-      //     tag: "bloodshot",
-      //     child: ClipRRect(
-      //       borderRadius: BorderRadius.circular(100),
-      //       child: Container(
-      //         width: 200,
-      //         height: 200,
-      //         child: Image(
-      //           fit: BoxFit.cover,
-      //           image: NetworkImage(
-      //               "https://asset.winnetnews.com/uploads/images/nisa-1570764028.jpg"),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
