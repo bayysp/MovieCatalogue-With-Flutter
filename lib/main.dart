@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/utils/page_transition.dart';
-import 'package:movie_app/view/detail_activity.dart';
-import 'package:movie_app/view/home_activity.dart';
+import 'package:movie_app/view/activity/detail_activity.dart';
+import 'package:movie_app/view/activity/home_activity.dart';
 
 void main() => runApp(MyApp());
 

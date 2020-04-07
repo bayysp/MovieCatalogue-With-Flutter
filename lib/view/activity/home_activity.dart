@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/view/movie_page.dart';
-import 'package:movie_app/view/tvshow_page.dart';
+import 'package:movie_app/view/fragment/movie_page.dart';
+import 'package:movie_app/view/fragment/tvshow_page.dart';
 
 class HomeActivity extends StatefulWidget {
   @override
@@ -45,7 +45,7 @@ class _HomeActivityState extends State<HomeActivity> {
               top: -getSmallDiameter(context) / 4,
               child: Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
-                
+
                 width: getBigDiameter(context),
                 height: getBigDiameter(context),
                 decoration: BoxDecoration(
@@ -69,14 +69,14 @@ class _HomeActivityState extends State<HomeActivity> {
 
             //bottom nav and content
             _children[_currentIndex],
-            
+
         ],
       ),
 
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Color(0xFF07575B),
         unselectedItemColor: Color(0xFFEDEDED),
-        currentIndex: _currentIndex, 
+        currentIndex: _currentIndex,
            items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.movie),

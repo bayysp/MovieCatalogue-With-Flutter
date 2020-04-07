@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/model/Movie.dart';
 import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/utils/Constants.dart';
 import 'package:movie_app/utils/page_transition.dart';
-import 'package:movie_app/view/detail_activity.dart';
+import 'package:movie_app/view/activity/detail_activity.dart';
 
 class MovieListView extends StatefulWidget {
   @override
@@ -10,15 +11,15 @@ class MovieListView extends StatefulWidget {
 }
 
 class _MovieListViewState extends State<MovieListView> {
-  Movie movie = Movie();
+  MovieModel movieModel = MovieModel();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Movie>>(
-      future: movie.getDiscoversMovie(),
+    return FutureBuilder<List<MovieModel>>(
+      future: movieModel.getDiscoversMovie(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          List<Movie> movieData = snapshot.data;
+          List<MovieModel> movieData = snapshot.data;
           return _movieDiscoverListView(movieData);
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
@@ -37,30 +38,30 @@ class _MovieListViewState extends State<MovieListView> {
     );
   }
 
-  ListTile _tile(Movie movie) => ListTile(
+  ListTile _tile(MovieModel movieModel) => ListTile(
         onTap: () {
           Navigator.push(context, PageTransition(
             alignment: Alignment.bottomCenter,
             curve: Curves.bounceOut,
             type: PageTransitionType.upToDown,
-            child: DetailActivity(movie: movie,)
+            child: DetailActivity(movieModel: movieModel,)
           ));
         },
         leading: Hero(
           transitionOnUserGestures: false,
-          tag: movie.id.toString(),
+          tag: movieModel.id.toString(),
           child: CircleAvatar(
             backgroundImage:
-                NetworkImage(Constants.baseIMAGEURL + movie.posterPath),
+                NetworkImage(Constants.baseIMAGEURL + movieModel.posterPath),
           ),
         ),
         title: Text(
-          movie.title,
+          movieModel.title,
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
           maxLines: 2,
         ),
         subtitle: Text(
-          movie.overview,
+          movieModel.overview,
           maxLines: 2,
         ),
         dense: false,

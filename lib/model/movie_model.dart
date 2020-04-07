@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/utils/Constants.dart';
 
-class Movie {
+class MovieModel {
   int id;
   String title;
   double voteAverage;
@@ -11,7 +11,7 @@ class Movie {
   String backdropPath;
   String releaseDate;
 
-  Movie(
+  MovieModel(
       {this.id,
       this.title,
       this.voteAverage,
@@ -21,8 +21,8 @@ class Movie {
       this.releaseDate});
 
   //factory is used to conver from json to object
-  factory Movie.fromJson(Map<String, dynamic> object) {
-    return Movie(
+  factory MovieModel.fromJson(Map<String, dynamic> object) {
+    return MovieModel(
         id: object['id'],
         title: object['title'],
         voteAverage: object['vote_average'].toDouble(),
@@ -32,7 +32,7 @@ class Movie {
         releaseDate: object['release_date']);
   }
 
-  Future<List<Movie>> getDiscoversMovie() async {
+  Future<List<MovieModel>> getDiscoversMovie() async {
     String apiURL =
         Constants.baseURL + "discover/movie?api_key=" + Constants.baseAPIKEY;
     var apiResult = await http.get(apiURL);
@@ -43,10 +43,10 @@ class Movie {
       // return jsonResponse.map((f) => Movie.fromJson(f)).toList();
       
       List<dynamic> listMovieDiscover = (jsonResponse as Map<String, dynamic>)['results'];
-      List<Movie> movies = [];
+      List<MovieModel> movies = [];
 
       for(int i=0; i<listMovieDiscover.length; i++){
-        movies.add(Movie.fromJson(listMovieDiscover[i]));
+        movies.add(MovieModel.fromJson(listMovieDiscover[i]));
       }
 
       return movies;
