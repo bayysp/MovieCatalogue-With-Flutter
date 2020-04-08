@@ -10,6 +10,7 @@ class MovieModel {
   String posterPath;
   String backdropPath;
   String releaseDate;
+  List<dynamic> genre;
 
   MovieModel(
       {this.id,
@@ -18,7 +19,8 @@ class MovieModel {
       this.overview,
       this.posterPath,
       this.backdropPath,
-      this.releaseDate});
+      this.releaseDate,
+      this.genre});
 
   //factory is used to conver from json to object
   factory MovieModel.fromJson(Map<String, dynamic> object) {
@@ -29,7 +31,8 @@ class MovieModel {
         overview: object['overview'],
         posterPath: object['poster_path'],
         backdropPath: object['backdrop_path'],
-        releaseDate: object['release_date']);
+        releaseDate: object['release_date'],
+        genre: object['genre_ids']);
   }
 
   Future<List<MovieModel>> getDiscoversMovie() async {

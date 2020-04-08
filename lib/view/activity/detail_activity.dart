@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/Movie.dart';
+import 'package:movie_app/model/genre_model.dart';
 import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/utils/Constants.dart';
 
@@ -146,9 +146,13 @@ class DetailActivity extends StatelessWidget {
                               Expanded(
                                 flex: 1,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Icon(Icons.star, color: Colors.orange,),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.orange,
+                                    ),
                                     Text("10.0")
                                   ],
                                 ),
@@ -160,13 +164,17 @@ class DetailActivity extends StatelessWidget {
                             margin: EdgeInsets.only(top: 8),
                             child: Align(
                               alignment: Alignment.topLeft,
-                              child: Text(
-                                "Actions, Drama, Sci-Fi ",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  backgroundColor: Colors.black45,
-                                ),
-                                textAlign: TextAlign.left,
+                              child: FutureBuilder(
+                                future: generatedGenres(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  if (snapshot.hasData) {
+                                    return _generatedGenres(
+                                        snapshot.data.toString());
+                                  } else {
+                                    return Text("data kosong");
+                                  }
+                                },
                               ),
                             ),
                           ),
@@ -180,6 +188,41 @@ class DetailActivity extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<String> generatedGenres() async {
+    String result = "";
+    Genre genre = Genre();
+
+    await for (var value in genre.getGenre().asStream()) {
+      for (int i = 0; i < movieModel.genre.length; i++) {
+        for (int j = 0; j < value.length; j++) {
+          if (value[j].id.toString() == movieModel.genre[i].toString()) {
+            result = result + value[j].name + " ";
+            break;
+          }
+        }
+      }
+    }
+
+    // genre.getGenre().then((onValue) {
+    //   for (int i = 0; i < movieModel.genre.length; i++) {
+    //     for (int j = 0; j < onValue.length; j++) {
+    //       if (movieModel.genre[i].id.toString() == onValue[j].id.toString()) {
+    //         result = result + onValue[j].name + " ";
+    //         break;
+    //       }
+    //     }
+    //   }
+    // });
+    return result;
+  }
+
+  Text _generatedGenres(result) {
+    return Text(
+      result,
+      style: TextStyle(fontSize: 16),
     );
   }
 }

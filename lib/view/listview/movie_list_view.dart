@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/Movie.dart';
 import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/utils/Constants.dart';
 import 'package:movie_app/utils/page_transition.dart';
